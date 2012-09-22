@@ -24,20 +24,21 @@ class RecipeService {
 	def search(def params) {
 			
 		def filteredParams = params.findAll{it.key in availableSearchParams}
+				
 		log.debug "Filtered params: $filteredParams"
 		if (!filteredParams)
 			throw new BadRequestException()
 
-			//el criteria es poner de forma mas elegante las querys. esto genera una query.
 			return Recipe.createCriteria().list {	
 				filteredParams.each {
 					log.debug "Setting criteria: ${it.key},${it.value}"
-					ilike it.key, ("%"+it.value)
-					//params.ingredientesB.split(",")
-					//ilike it.key, it.value
-					// es como un where de un SQL.
+					def valores = it.value.split(",")
+					log.debug "Split: $valores"
+					
+					and{ valores.each {q -> ilike 'ingredientesB', ("%"+q)}
+					 }		
 				}
-			}.collect{it.filterResult()} //Saca la caca que trae mongo, la clase y IDS locos.		
+			}.collect{it.filterResult()}		
 	}
 	
 }
