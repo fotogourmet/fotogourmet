@@ -76,14 +76,15 @@ log4j = {
     // appender:
     //
     appenders {
-		console name:'stdout', layout:pattern(conversionPattern: '[%-3p] [%d{HH:mm:ss}] [%c{1}]: %m%n')    
+		console name:'stdout', layout:pattern(conversionPattern: '[%-3p] [%d{HH:mm:ss}] [%c{1}]: %m%n')
+		'null' name: 'stacktrace'    
 		}
 	
 	root{
 		info "stdout"
 	}
 
-    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+     info  'org.codehaus.groovy.grails.web.servlet',  //  controllers
            'org.codehaus.groovy.grails.web.pages', //  GSP
            'org.codehaus.groovy.grails.web.sitemesh', //  layouts
            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping

@@ -1,4 +1,4 @@
-package com.pijosoft.pijorecipes.exceptions
+package com.fotogourmet.exceptions
 
 class NotFoundException extends Exception {
 

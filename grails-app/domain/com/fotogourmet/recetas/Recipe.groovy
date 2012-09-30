@@ -1,4 +1,4 @@
-package com.pijosoft.pijorecipes
+package com.fotogourmet.recetas
 
 import org.bson.types.ObjectId
 
@@ -10,7 +10,8 @@ ObjectId id
 	String ingredientes
 	String ingredientesB
 	String procedimiento
-	
+	String Categoria
+
 	static mapping = {
 		nombre index:true
 		collection "recetas"

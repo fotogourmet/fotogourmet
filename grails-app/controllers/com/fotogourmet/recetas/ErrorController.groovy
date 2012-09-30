@@ -1,4 +1,4 @@
-package com.pijosoft.pijorecipes
+package com.fotogourmet.recetas
 
 import grails.converters.JSON
 
