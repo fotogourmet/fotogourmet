@@ -13,7 +13,7 @@ class QueryHelperService {
     def doQuery(def collection, def query) {
 		def output = db[collection].find(query).skip(0).limit(25)
 		log.debug "RESULT COUNT: ${output.count}"
-		return output*.toMap()
+		return output.toString()
     }
 	
 }

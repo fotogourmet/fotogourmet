@@ -18,7 +18,7 @@ class RestController {
 	]
 	
 	//los applets son clases que interceptan cosas http.
-	//este beforeinterceptor se ejecuta antes de cada metodo del controller. Se hace una validación de los parametros.
+	//este beforeinterceptor se ejecuta antes de cada metodo del controller. Se hace una validaciï¿½n de los parametros.
 	def beforeInterceptor = {
 		if (!validationService.validateInput(validationFields[actionName], params))
 			response.sendError(400)
@@ -55,7 +55,7 @@ class RestController {
 		if (!result)
 			response.sendError(404)
 		
-		render result as JSON 
+		render result //as JSON 
 	}
 	
 	def saveRecipe = {
