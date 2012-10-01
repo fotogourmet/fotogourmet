@@ -11,7 +11,9 @@ class QueryHelperService {
 	DB db = mongo.getDB('test')
 
     def doQuery(def collection, def query) {
-		return db[collection].find(query).toMap()
+		def output = db[collection].find(query).skip(0).limit(25)
+		log.debug "RESULT COUNT: ${output.count}"
+		return output*.toMap()
     }
 	
 }
