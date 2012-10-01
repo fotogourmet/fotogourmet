@@ -11,7 +11,17 @@ class QueryHelperService {
 	DB db = mongo.getDB('test')
 
     def doQuery(def collection, def query) {
-		return db[collection].find(query)
+		def output = []
+		def cursor = db[collection].find(query)
+		
+		try {
+			while(cursor.hasNext()) 
+				output << cursor
+		} finally {
+			cursor.close()
+		}
+		
+		return output
     }
 	
 }
