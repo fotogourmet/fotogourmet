@@ -31,13 +31,13 @@ class RecipeService {
 			throw new BadRequestException()
 
 			return Recipe.createCriteria().list {	
-				filteredParams.each {
-					log.debug "Setting criteria: ${it.key},${it.value}"
-					def valores = it.value.split(",")
-					log.debug "Split: $valores"
-					
-					and{ valores.each {q -> ilike 'ingredientesB', ("%"+q)}
-					 }		
+				and{
+					filteredParams.each {
+						log.debug "Setting criteria: ${it.key},${it.value}"
+						def valores = it.value.split(",")
+						log.debug "Split: $valores"
+						valores.each {q -> ilike it.key, ("%"+q)}		
+					}
 				}
 			}.collect{it.filterResult()}		
 
