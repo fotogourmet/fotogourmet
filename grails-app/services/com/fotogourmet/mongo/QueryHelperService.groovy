@@ -8,11 +8,10 @@ class QueryHelperService {
 	static transactional = false
 	
 	GMongo mongo = new GMongo()
+	DB db = mongo.getDB('test')
 
     def doQuery(def collection, def query) {
-		def db = mongo.getDB(collection)
-		
-		return db.find(query)
+		return db[collection].find(query)
     }
 	
 }

@@ -15,7 +15,7 @@ class RecipeService {
 	def queryHelperService
 	
 	def queryBuilder = [
-		'ingredientesB': {val -> [ingredientesB: [$regex : '.*'+val+'.*', $options: 'i']]},
+		'ingredientesB': {val -> [ingredientesB: [$elemMatch: [$regex : '.*'+val+'.*', $options: 'i']]]},
 		'categoria': {val -> [categoria: val]}
 	]
 	
