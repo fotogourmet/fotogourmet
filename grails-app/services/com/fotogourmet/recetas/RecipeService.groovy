@@ -47,7 +47,7 @@ class RecipeService {
 		if (!filteredParams)
 			throw new BadRequestException()
 
-		return makeQuery(filteredParams)*.filterResult()	
+		return makeQuery(filteredParams)
 	}
 	
 }
