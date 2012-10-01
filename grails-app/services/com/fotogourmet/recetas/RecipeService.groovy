@@ -32,7 +32,7 @@ class RecipeService {
 		def queryList = []
 		params.each {
 			it.value?.split(",")?.each{ q ->
-				output << queryBuilder[it.key](q)
+				queryList << queryBuilder[it.key](q)
 			}
 		}
 		
