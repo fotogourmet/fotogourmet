@@ -1,8 +1,9 @@
-package com.pijosoft.pijorecipes
+package com.fotogourmet.recetas
 
+import com.fotogourmet.recetas.Recipe;
 import com.mongodb.BasicDBObject
 import com.mongodb.DBCollection
-import com.pijosoft.pijorecipes.exceptions.BadRequestException
+import com.fotogourmet.exceptions.BadRequestException
 import org.bson.types.ObjectId
 
 class RecipeService {
@@ -39,6 +40,7 @@ class RecipeService {
 					 }		
 				}
 			}.collect{it.filterResult()}		
+
 	}
 	
 }

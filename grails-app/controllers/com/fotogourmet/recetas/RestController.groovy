@@ -1,10 +1,11 @@
-package com.pijosoft.pijorecipes
+package com.fotogourmet.recetas
 
-import com.pijosoft.pijorecipes.exceptions.BadRequestException
-import com.pijosoft.pijorecipes.exceptions.ForbiddenException
+import com.fotogourmet.exceptions.BadRequestException
+import com.fotogourmet.exceptions.ForbiddenException
 
 import grails.converters.JSON
 import grails.validation.ValidationException
+
 
 class RestController {
 	
@@ -54,7 +55,7 @@ class RestController {
 		if (!result)
 			response.sendError(404)
 		
-		render result as JSON
+		render result as JSON 
 	}
 	
 	def saveRecipe = {
