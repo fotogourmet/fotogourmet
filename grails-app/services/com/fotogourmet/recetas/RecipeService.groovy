@@ -13,7 +13,8 @@ class RecipeService {
 	def authService
 	
 	def availableSearchParams = [
-		'ingredientesB'	
+		'ingredientesB',
+		'categoria'	
 	]
 
     def get(String id) {
@@ -33,13 +34,12 @@ class RecipeService {
 			return Recipe.createCriteria().list {	
 				and{
 					filteredParams.each {
-						log.debug "Setting criteria: ${it.key},${it.value}"
-						def valores = it.value.split(",")
-						log.debug "Split: $valores"
-						valores.each {q -> ilike it.key, ("%"+q)}		
+						it.value?.split(",")?.each{ q ->
+							ilike it.key, "%${q}%"
+						}		
 					}
 				}
-			}.collect{it.filterResult()}		
+			}*.filterResult()	
 
 	}
 	

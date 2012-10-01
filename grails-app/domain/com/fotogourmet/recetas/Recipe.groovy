@@ -10,7 +10,7 @@ ObjectId id
 	String ingredientes
 	String ingredientesB
 	String procedimiento
-	String Categoria
+	String categoria
 
 	static mapping = {
 		nombre index:true
