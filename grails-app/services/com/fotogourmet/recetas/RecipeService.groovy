@@ -8,7 +8,7 @@ import org.bson.types.ObjectId
 
 class RecipeService {
 	
-	static transactional = 'false'
+	static transactional = false
 	
 	def authService
 	
@@ -32,7 +32,7 @@ class RecipeService {
 
 			return Recipe.createCriteria().list {	
 				filteredParams.each {
-					log.debug "Setting criteria: ${it.key},${it.value}"
+					log.debg "Setting criteria: ${it.key},${it.value}"
 					def valores = it.value.split(",")
 					log.debug "Split: $valores"
 					
