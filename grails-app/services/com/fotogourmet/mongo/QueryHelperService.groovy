@@ -12,7 +12,7 @@ class QueryHelperService {
     def doQuery(def collection, def query) {
 		def db = mongo.getDB(collection)
 		
-		return db.list(query)
+		return db.find(query)
     }
 	
 }
