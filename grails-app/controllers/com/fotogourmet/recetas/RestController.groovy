@@ -39,7 +39,19 @@ class RestController {
 			
 		render recipe as JSON
 	}
+
+	def getCode	= {
 	
+	def code
+	try {
+		code = codeService.get(params)
+	} catch (Exception e) {
+		log.error "Error buscando el codigo $params", e
+		response.sendError(501)
+		}
+	render code as JSON
+	}
+		
 	
 	def searchRecipes = {
 		def result
