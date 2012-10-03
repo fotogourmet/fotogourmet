@@ -44,9 +44,9 @@ class RestController {
 	
 	def code
 	try {
-		code = codeService.get(params)
+		code = codeService.search(params.codigo)
 	} catch (Exception e) {
-		log.error "Error buscando el codigo $params", e
+		log.error "Error buscando el codigo $params.codigo", e
 		response.sendError(501)
 		}
 	render code as JSON

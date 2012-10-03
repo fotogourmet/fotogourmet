@@ -10,7 +10,7 @@ class UrlMappings {
 			action = [GET: 'getRecipe', POST: 'saveRecipe']
 		}
 		
-		"/codigo/search"(controller: "rest", parseRequest: true){
+		"/codigo/$codigo?"(controller: "rest", parseRequest: true){
 			action = [GET: 'getCode']
 		}
 				

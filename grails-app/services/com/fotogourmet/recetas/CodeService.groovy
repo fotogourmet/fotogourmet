@@ -7,4 +7,8 @@ import com.gmongo.GMongo
 import org.bson.types.ObjectId
 
 
-class CodeService {
+def search (def params){
+	log.debug "Querying with codigo: $codigo"
+	ObjectId oId = new ObjectId(codigo)
+	return Recipe.get(oId)?.filterResult()
+}
