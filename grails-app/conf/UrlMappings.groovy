@@ -10,7 +10,10 @@ class UrlMappings {
 			action = [GET: 'getRecipe', POST: 'saveRecipe']
 		}
 		
-		
+		"/codigo/search"(controller: "rest", parseRequest: true){
+			action = [GET: 'getCode']
+		}
+				
 		"/$controller/$action?/$id?"{
 			constraints {
 				// apply constraints here
