@@ -13,7 +13,13 @@ class RecipeService {
 	
 	def authService
 	def queryHelperService
+
+	final def outputParameters = [
+		'ingredientesB',
+		'descripcion'
+	]
 	
+
 	def queryBuilder = [
 		'ingredientesB': {val -> [ingredientesB: [$elemMatch: [$regex : '.*'+val+'.*', $options: 'i']]]},
 		'categoria': {val -> [categoria: val]}
@@ -36,7 +42,12 @@ class RecipeService {
 			}
 		}
 		
-		return queryHelperService.doQuery('recetas', [$and: queryList])
+		return queryHelperService.doQuery('recetas', [$and: queryList]).collect{filterQuery(it)}
+	}
+	
+	def filterQuery(def result) {
+		return result?.subMap(outputParameters)
+
 	}
 	
 	def search(def params) {
