@@ -11,10 +11,12 @@ class RestController {
 	
 	def recipeService
 	def validationService
+	def codeService
 	
 	def validationFields = [
 		getRecipe: [condition: 'all', fields: ['id']],
-		searchRecipes: [condition: 'at_least_one', fields: ['ingredientesB']]
+		searchRecipes: [condition: 'at_least_one', fields: ['ingredientesB'],
+		getCode: [condition: 'all', fields:['ean']]]
 	]
 	
 	//los applets son clases que interceptan cosas http.
@@ -67,7 +69,7 @@ class RestController {
 		if (!result)
 			response.sendError(404)
 		
-		render result //as JSON 
+		render result as JSON 
 	}
 	
 	def saveRecipe = {

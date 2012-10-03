@@ -8,7 +8,6 @@ import org.bson.types.ObjectId
 
 
 def search (def params){
-	log.debug "Querying with codigo: $codigo"
-	ObjectId oId = new ObjectId(codigo)
-	return Recipe.get(oId)?.filterResult()
+	log.debug "Querying with codigo: $params"
+	return queryHelperService.doQuery('codigosbarra', 'ean').collect{filterQuery(params)}
 }

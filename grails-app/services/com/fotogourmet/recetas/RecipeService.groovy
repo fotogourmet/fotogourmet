@@ -15,14 +15,18 @@ class RecipeService {
 	def queryHelperService
 
 	final def outputParameters = [
-		'ingredientesB',
-		'descripcion'
+		'nombre',
+		'imagenPpal',
+		'ingredientes',
+		'procedimiento',
+		'categoria'
 	]
 	
 
 	def queryBuilder = [
 		'ingredientesB': {val -> [ingredientesB: [$elemMatch: [$regex : '.*'+val+'.*', $options: 'i']]]},
-		'categoria': {val -> [categoria: val]}
+		'categoria': {val -> [categoria: val]},
+		'ean':{val -> [ean: val]}
 	]
 	
 	def availableSearchParams = queryBuilder.keySet() as List
