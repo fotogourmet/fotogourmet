@@ -11,7 +11,7 @@ class CodeService {
 	
 	def search(def params) {
 		log.debug "Buscando codigo: $params"
-		return queryHelperService.doQuery('codigosbarra', ean: params).collect{queryUtilsService.filterQuery(it, outputParameters)}
+		return queryHelperService.doQuery('codigosbarra', [ean: params]).collect{queryUtilsService.filterQuery(it, outputParameters)}
 	}
 		
 }
