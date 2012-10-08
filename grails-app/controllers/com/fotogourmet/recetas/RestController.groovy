@@ -12,6 +12,7 @@ class RestController {
 	def recipeService
 	def validationService
 	def codeService
+	def ingredientService
 	
 	def validationFields = [
 		getRecipe: [condition: 'all', fields: ['id']],
@@ -40,6 +41,10 @@ class RestController {
 			response.sendError(404)
 			
 		render recipe as JSON
+	}
+	
+	def validate = {
+		return ingredientService.validateIng(params.ingrediente)
 	}
 
 	def getCode	= {

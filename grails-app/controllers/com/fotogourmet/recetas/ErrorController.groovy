@@ -5,7 +5,7 @@ import grails.converters.JSON
 class ErrorController {
 
     def badRequest = {
-		render status:400, contentType: "application/json", text:([error: 400, status: "Deben especificarse todos los parámetros"] as JSON).toString()
+		render status:400, contentType: "application/json", text:([error: 400, status: "Deben especificarse todos los parametros"] as JSON).toString()
 	}
 	
 	def notFound = {
@@ -23,4 +23,13 @@ class ErrorController {
 	def codigoInexistente = {
 		render status:501, contentType: "application/json", text:([error: 501, status: "El codigo no existe"] as JSON).toString()
 	}
+	
+	def ingredienteValido = {
+		render status:600, contentType: "application/json", text:([validation: 600, status: "El ingrediente es valido"] as JSON).toString()
+	}
+	
+	def ingredienteInvalido = {
+		render status:601, contentType: "application/json", text:([validation: 601, status: "El ingrediente es invalido"] as JSON).toString()
+	}
+	
 }

@@ -1,4 +1,4 @@
-class UrlMappings {
+ class UrlMappings {
 
 	static mappings = {
 		
@@ -13,7 +13,11 @@ class UrlMappings {
 		"/codigo/$codigo?"(controller: "rest", parseRequest: true){
 			action = [GET: 'getCode']
 		}
-				
+		
+		"/validate/$ingrediente?"(controller: "rest", parseRequest: true){
+			action = [GET: 'validate']
+		}
+		
 		"/$controller/$action?/$id?"{
 			constraints {
 				// apply constraints here
