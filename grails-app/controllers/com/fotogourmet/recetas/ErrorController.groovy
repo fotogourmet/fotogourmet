@@ -21,6 +21,6 @@ class ErrorController {
 	}
 	
 	def codigoInexistente = {
-		render status:501, contentType: "application/json", text:([error: 501, status: "El código no existe"] as JSON).toString()
+		render status:501, contentType: "application/json", text:([error: 501, status: "El codigo no existe"] as JSON).toString()
 	}
 }

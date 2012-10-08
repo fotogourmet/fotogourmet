@@ -1,13 +1,31 @@
 package com.fotogourmet.recetas
 
-import com.mongodb.BasicDBObject
-import com.mongodb.DBCollection
 import com.fotogourmet.exceptions.BadRequestException
+import com.mongodb.DBCollection
 import com.gmongo.GMongo
-import org.bson.types.ObjectId
+import com.mongodb.DB
+
+def queryHelperService
 
 
-def search (def params){
-	log.debug "Querying with codigo: $params"
-	return queryHelperService.doQuery('codigosbarra', 'ean').collect{filterQuery(params)}
+final def outputParameters = [
+	'ingrediente'
+	]
+
+def search(def params) {
+	
+	log.debug "Buscando codigo: $params"
+	
+	//return queryHelperService.doQuery('codigosbarra', ean: params)
+	
+	GMongo mongo = new GMongo()
+	DB db = mongo.getDB('test')
+
+	return db.codigosbarra.find(ean: params).skip(0).limit(25)*.toMap() //.collect{filterQuery(it)}
+			
+}
+	
+def filterQuery(def result) {
+	return result?.subMap(outputParameters)
+
 }
