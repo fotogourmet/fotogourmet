@@ -10,8 +10,9 @@ class QueryHelperService {
 	GMongo mongo = new GMongo()
 	DB db = mongo.getDB('test')
 
-    	def doQuery(def collection, def query) {
+    	
+	def doQuery(def collection, def query) {
 		return db[collection].find(query).skip(0).limit(25)*.toMap()
-    	}
+    }
 	
 }

@@ -13,6 +13,7 @@ class RecipeService {
 	
 	def authService
 	def queryHelperService
+	def queryUtilsService
 
 	final def outputParameters = [
 		'nombre',
@@ -46,13 +47,10 @@ class RecipeService {
 			}
 		}
 		
-		return queryHelperService.doQuery('recetas', [$and: queryList]).collect{filterQuery(it)}
+		return queryHelperService.doQuery('recetas', [$and: queryList]).collect{queryUtilsService.filterQuery(it, outputParameters)}
 	}
 	
-	def filterQuery(def result) {
-		return result?.subMap(outputParameters)
-
-	}
+	
 	
 	def search(def params) {
 			
