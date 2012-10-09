@@ -11,6 +11,8 @@ ObjectId id
 	String ingredientesB
 	String procedimiento
 	String categoria
+	String calificacion
+	String video
 
 	static mapping = {
 		nombre index:true

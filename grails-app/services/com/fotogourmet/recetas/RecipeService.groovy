@@ -20,7 +20,9 @@ class RecipeService {
 		'imagenPpal',
 		'ingredientes',
 		'procedimiento',
-		'categoria'
+		'categoria',
+		'video',
+		'calificacion'
 	]
 	
 
