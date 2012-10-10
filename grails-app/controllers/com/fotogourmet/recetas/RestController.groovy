@@ -13,15 +13,13 @@ class RestController {
 	def validationService
 	def codeService
 	def ingredientService
-	
+		
 	def validationFields = [
 		getRecipe: [condition: 'all', fields: ['id']],
 		searchRecipes: [condition: 'at_least_one', fields: ['ingredientesB'],
 		getCode: [condition: 'all', fields:['ean']]]
 	]
 	
-	//los applets son clases que interceptan cosas http.
-	//este beforeinterceptor se ejecuta antes de cada metodo del controller. Se hace una validaci�n de los parametros.
 	def beforeInterceptor = {
 		if (!validationService.validateInput(validationFields[actionName], params))
 			response.sendError(400)
@@ -44,7 +42,21 @@ class RestController {
 	}
 	
 	def validate = {
-		return ingredientService.validateIng(params.ingrediente)
+	def validation
+	try { 
+		validation = ingredientService.validateIng(params.ingrediente)
+	} catch (BadRequestException e) {
+		response.sendError(501)
+	}catch (Exception e) {
+		log.error "Error validando el ingrediente", e
+		response.sendError(500)
+		}
+		if (validation){
+			response.sendError(600)
+			}
+			else{
+			response.sendError(601)
+		}
 	}
 
 	def getCode	= {

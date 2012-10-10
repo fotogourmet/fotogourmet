@@ -20,16 +20,17 @@ class ErrorController {
 		render status:500, contentType: "application/json", text:([error: 500, status: "Error del servidor"] as JSON).toString()
 	}
 	
+		
 	def codigoInexistente = {
 		render status:501, contentType: "application/json", text:([error: 501, status: "El codigo no existe"] as JSON).toString()
-	}
+	}	
 	
 	def ingredienteValido = {
-		render status:600, contentType: "application/json", text:([validation: 600, status: "El ingrediente es valido"] as JSON).toString()
+		render status:600, contentType: "application/json", text:([error: 600, status: "Ingrediente Valido"] as JSON).toString()
 	}
 	
 	def ingredienteInvalido = {
-		render status:601, contentType: "application/json", text:([validation: 601, status: "El ingrediente es invalido"] as JSON).toString()
+		render status:601, contentType: "application/json", text:([error: 601, status: "Ingrediente Invalido"] as JSON).toString()
 	}
 	
 }
