@@ -46,7 +46,7 @@ class RestController {
 	try { 
 		validation = ingredientService.validateIng(params.ingrediente)
 	} catch (BadRequestException e) {
-		response.sendError(501)
+		response.sendError(404)
 	}catch (Exception e) {
 		log.error "Error validando el ingrediente", e
 		response.sendError(500)
@@ -55,7 +55,7 @@ class RestController {
 			response.sendError(200)
 			}
 			else{
-			response.sendError(400)
+			response.sendError(404)
 		}
 	}
 

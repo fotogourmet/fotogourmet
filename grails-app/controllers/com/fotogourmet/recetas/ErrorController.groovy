@@ -22,10 +22,6 @@ class ErrorController {
 	
 	def serverError = {
 		render status:500, contentType: "application/json", text:([error: 500, status: "Error del servidor"] as JSON).toString()
-	}
-			
-	def codigoInexistente = {
-		render status:501, contentType: "application/json", text:([error: 501, status: "El codigo no existe"] as JSON).toString()
 	}	
 	
 }
