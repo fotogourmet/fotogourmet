@@ -42,36 +42,36 @@ class RestController {
 	}
 	
 	def validate = {
-	def validation
-	try { 
-		validation = ingredientService.validateIng(params.ingrediente)
-	} catch (BadRequestException e) {
-		response.sendError(404)
-	}catch (Exception e) {
-		log.error "Error validando el ingrediente", e
-		response.sendError(500)
+		def validation
+		try { 
+			validation = ingredientService.validateIng(params.ingrediente)
+		} catch (BadRequestException e) {
+			response.sendError(400)
+		} catch (Exception e) {
+			log.error "Error validando el ingrediente", e
+			response.sendError(500)
 		}
-		if (validation){
+		
+		if (validation)
 			response.sendError(200)
-			}
-			else{
-			response.sendError(404)
-		}
+		else
+			response.sendError(400)
 	}
 
 	def getCode	= {
-	def code
-	try {
-		code = codeService.search(params.codigo)
-	} catch (BadRequestException e) {
-		response.sendError(501)
+		def code
+		try {
+			code = codeService.search(params.codigo)
+		} catch (BadRequestException e) {
+			response.sendError(400)
 		}catch (Exception e) {
-		log.error "Error buscando el codigo", e
-		response.sendError(500)
+			log.error "Error buscando el codigo", e
+			response.sendError(500)
 		}
+		
 		if (!code)
-		response.sendError(404)
-	
+			response.sendError(404)
+			
 		render code as JSON
 	}
 	
