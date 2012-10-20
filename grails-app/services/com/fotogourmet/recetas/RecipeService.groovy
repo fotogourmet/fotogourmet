@@ -16,7 +16,6 @@ class RecipeService {
 	def queryUtilsService
 
 	final def outputParameters = [
-		'id',
 		'nombre',
 		'imagenPpal',
 		'ingredientes',
