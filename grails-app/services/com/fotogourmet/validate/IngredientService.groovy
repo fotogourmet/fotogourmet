@@ -11,6 +11,6 @@ class IngredientService {
 	
     def validateIng(def params) {
 			log.debug "Buscando ingrediente: $params"
-			return queryHelperService.doQuery('ingredientes', [ing:[$regex: '/'+params+'/i']]).collect{queryUtilsService.filterQuery(it, outputParameters)}
+			return queryHelperService.doQuery('ingredientes',[ing: [ $regex: params, $options: 'i'] ]).collect{queryUtilsService.filterQuery(it, outputParameters)}
 		}
 }
