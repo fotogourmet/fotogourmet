@@ -12,7 +12,7 @@ class QueryHelperService {
 
     	
 	def doQuery(def collection, def query) {
-		return db[collection].find(query).skip(0).limit(25)*.toMap()
+		return db[collection].find(query).skip(0).limit(100)*.toMap()
     }
 	
 }

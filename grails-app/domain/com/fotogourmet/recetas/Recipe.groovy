@@ -4,7 +4,7 @@ import org.bson.types.ObjectId
 
 class Recipe {
 	
-ObjectId id
+	ObjectId id
 	String nombre
 	String imagenPpal
 	String ingredientes
