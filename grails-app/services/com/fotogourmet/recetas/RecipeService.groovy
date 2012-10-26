@@ -16,6 +16,7 @@ class RecipeService {
 	def queryUtilsService
 
 	final def outputParameters = [
+		'_id',
 		'nombre',
 		'imagenPpal',
 		'ingredientes',
