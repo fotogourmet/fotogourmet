@@ -53,7 +53,7 @@ class RestController {
 		}
 		
 		if (validation)
-			response.sendError(302)
+			response.sendError(200)
 	 	else
 			response.sendError(400)
 	}
