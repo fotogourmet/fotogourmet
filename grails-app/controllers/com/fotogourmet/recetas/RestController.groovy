@@ -16,7 +16,7 @@ class RestController {
 		
 	def validationFields = [
 		getRecipe: [condition: 'all', fields: ['id']],
-		searchRecipes: [condition: 'at_least_one', fields: ['ingredientesB'],
+		searchRecipes: [condition: 'at_least_one', fields: ['ingredientesB','categoria','sort'],
 		getCode: [condition: 'all', fields:['ean']]]
 	]
 	

@@ -28,10 +28,9 @@ class RecipeService {
 	
 
 	def queryBuilder = [
-		'ingredientesB': {val -> [ingredientesB: [$elemMatch: [$regex : '.*'+val+'.*', $options: 'i']]]},
-		'categoria': {val -> [categoria: val]},
-		'ean':{val -> [ean: val]}
-	]
+		 'ingredientesB': {val -> [ingredientesB: [$elemMatch: [$regex : '.*'+val+'.*', $options: 'i']]]},
+		 'categoria': {val -> [categoria: val]}
+		]
 	
 	def availableSearchParams = queryBuilder.keySet() as List
 	
@@ -56,7 +55,10 @@ class RecipeService {
 	
 	
 	def search(def params) {
-			
+		
+		if (params.sort && !(params.sort in ["random", "calificacion"]))
+				throw new BadRequestException()
+							
 		def filteredParams = params.findAll{it.key in availableSearchParams}
 				
 		log.debug "Filtered params: $filteredParams"
