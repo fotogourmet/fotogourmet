@@ -40,6 +40,10 @@ class RecipeService {
 		return Recipe.get(oId)?.filterResult()
     }
 	
+	def groupQuery(def params){
+		return params.groupBy{it.param}.collectEntries{k,v -> [k, v*.value]}
+	}
+		
 	def makeQuery(def params) {
 		
 		def queryList = []
@@ -52,8 +56,7 @@ class RecipeService {
 		return queryHelperService.doQuery('recetas', [$and: queryList]).collect{queryUtilsService.filterQuery(it, outputParameters)}
 	}
 	
-	
-	
+		
 	def search(def params) {
 		
 		if (params.sort && !(params.sort in ["random", "calificacion"]))
