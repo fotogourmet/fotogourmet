@@ -17,7 +17,8 @@ class RestController {
 	def validationFields = [
 		getRecipe: [condition: 'all', fields: ['id']],
 		searchRecipes: [condition: 'at_least_one', fields: ['ingredientesB','categoria','sort'],
-		getCode: [condition: 'all', fields:['ean']]]
+		getCode: [condition: 'all', fields:['ean']]],
+		qualifyRecipe: [condition: 'all',fields:['value','id']]
 	]
 	
 	def beforeInterceptor = {
@@ -106,5 +107,17 @@ class RestController {
 		}
 		
 		render result as JSON
+	}
+	
+	def qualifyRecipe = {
+		try {
+			recipeService.qualify(params)
+		} catch (ForbiddenException e) {
+			response.sendError(403)
+		} catch (ValidationException e) {
+			response.sendError(400)
+		} catch (Exception e) {
+			response.sendError(500)
+		}
 	}
 }

@@ -3,6 +3,7 @@ package com.fotogourmet.recetas
 import com.fotogourmet.recetas.Recipe;
 import com.mongodb.BasicDBObject
 import com.mongodb.DBCollection
+import com.sun.xml.internal.messaging.saaj.util.LogDomainConstants;
 import com.fotogourmet.exceptions.BadRequestException
 import com.gmongo.GMongo
 import org.bson.types.ObjectId
@@ -53,7 +54,11 @@ class RecipeService {
 			}
 		}
 		
-		return queryHelperService.doQuery('recetas', [$and: queryList]).collect{queryUtilsService.filterQuery(it, outputParameters)}
+		def lista = []
+		lista = groupQuery(queryList)
+		
+		log.debug "lista junta: $lista "
+		return queryHelperService.doQuery('recetas', [$and: groupQuery(queryList)]).collect{queryUtilsService.filterQuery(it, outputParameters)}
 	}
 	
 		
@@ -69,6 +74,12 @@ class RecipeService {
 			throw new BadRequestException()
 
 		return makeQuery(filteredParams)
+	}
+	
+	def qualify(def params){
+		if (!params.value.isNumber() && !params.id)
+		trhow new BadRequestException()
+		log.debug "Calificación: $params.value $params.id"
 	}
 	
 }

@@ -17,6 +17,9 @@
 		"/validate/$ingrediente?"(controller: "rest", parseRequest: true){
 			action = [GET: 'validate']
 		}
+		"/recipes/qualify"(controller: "rest", parseRequest: true){
+			action = [POST: 'qualifyRecipe']
+		}
 		
 		"/$controller/$action?/$id?"{
 			constraints {
@@ -28,6 +31,5 @@
 		"403"(controller: 'error', action: 'forbidden')
 		"404"(controller: 'error', action: 'notFound')
 		"500"(controller: 'error', action: 'serverError')
-		"501"(controller: 'error', action: 'codigoInexistente')
 	}
 }
