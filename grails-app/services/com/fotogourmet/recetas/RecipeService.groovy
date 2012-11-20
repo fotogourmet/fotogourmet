@@ -40,12 +40,8 @@ class RecipeService {
 		ObjectId oId = new ObjectId(id)
 		return Recipe.get(oId)?.filterResult()
     }
-	
-	def groupQuery(def params){
-		return params.groupBy{it.param}.collectEntries{k,v -> [k, v*.value]}
-	}
-		
-	def makeQuery(def params) {
+			
+	def makeQuery(def params, def sort) {
 		
 		def queryList = []
 		params.each {
@@ -53,12 +49,10 @@ class RecipeService {
 				queryList << queryBuilder[it.key](q)
 			}
 		}
-		
-		def lista = []
-		lista = groupQuery(queryList)
-		
-		log.debug "lista junta: $lista "
-		return queryHelperService.doQuery('recetas', [$and: groupQuery(queryList)]).collect{queryUtilsService.filterQuery(it, outputParameters)}
+		if (sort)
+		return queryHelperService.doQuery('recetas', [$and: queryList],sort).collect{queryUtilsService.filterQuery(it, outputParameters)}
+		else
+		return queryHelperService.doQuery('recetas', [$and: queryList]).collect{queryUtilsService.filterQuery(it, outputParameters)}
 	}
 	
 		
@@ -73,12 +67,12 @@ class RecipeService {
 		if (!filteredParams)
 			throw new BadRequestException()
 
-		return makeQuery(filteredParams)
+		return makeQuery(filteredParams, params.sort)
 	}
 	
 	def qualify(def params){
 		if (!params.value.isNumber() && !params.id)
-		trhow new BadRequestException()
+		throw new BadRequestException()
 		log.debug "Calificación: $params.value $params.id"
 	}
 	
