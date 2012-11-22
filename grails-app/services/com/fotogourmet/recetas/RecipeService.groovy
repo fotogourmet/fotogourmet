@@ -71,9 +71,23 @@ class RecipeService {
 	}
 	
 	def qualify(def params){
-		if (!params.value.isNumber() && !params.id)
+		if (!params.id)
 		throw new BadRequestException()
-		log.debug "Calificación: $params.value $params.id"
+		
+			
+		def score = request.JSON.score
+		
+		if (!(score<=5 && score>=1)) 
+		throw new BadRequestException()
+		
+		log.debug "id: $params.id"
+		
+		def recipe
+		recipe = get(params.id)
+		
+		// aca van todas las cuentas con el mapa que trajo de la receta.
+		
+		qualifyService.saveScore(params.id, newScore, acumScore,countScore)
 	}
 	
 }
