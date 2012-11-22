@@ -39,7 +39,8 @@ class RestController {
 		if (!recipe)
 			response.sendError(404)
 			
-		render recipe as JSON
+		[jsRecipe:recipe]
+		//render recipe as JSON
 	}
 	
 	def validate = {
