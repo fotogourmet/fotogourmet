@@ -110,8 +110,10 @@ class RestController {
 	}
 	
 	def qualifyRecipe = {
+		def result
 		try {
-			recipeService.qualify(params)
+			result = recipeService.qualify(params, request?.JSON)
+
 		} catch (ForbiddenException e) {
 			response.sendError(403)
 		} catch (ValidationException e) {
@@ -119,5 +121,7 @@ class RestController {
 		} catch (Exception e) {
 			response.sendError(500)
 		}
+		log.debug "Resultado: ${result}"
+		render result as JSON
 	}
 }

@@ -15,6 +15,7 @@ class RecipeService {
 	def authService
 	def queryHelperService
 	def queryUtilsService
+	def qualifyService
 
 	final def outputParameters = [
 		'_id',
@@ -70,24 +71,39 @@ class RecipeService {
 		return makeQuery(filteredParams, params.sort)
 	}
 	
-	def qualify(def params){
+	def qualify(def params, def body){
 		if (!params.id)
-		throw new BadRequestException()
+		throw new BadRequestException("Invalid id")
 		
-			
-		def score = request.JSON.score
+		log.debug "ID DEL ORTO1: ${params.id}"
 		
-		if (!(score<=5 && score>=1)) 
-		throw new BadRequestException()
+		log.debug "BODY DE MIERDA: ${body}"
+					
+		def score = body.score
 		
-		log.debug "id: $params.id"
+		log.debug "SCORE: ${score}"
+
+				if (!(score<=5 && score>=1)) 
+		throw new BadRequestException("Wrong Score")
+		
+		
+		log.debug "ID DEL ORTO2: ${params.id}"
 		
 		def recipe
 		recipe = get(params.id)
 		
-		// aca van todas las cuentas con el mapa que trajo de la receta.
+		log.debug "recipe: ${recipe}"
 		
-		qualifyService.saveScore(params.id, newScore, acumScore,countScore)
+		int acumScore = (recipe.calificacion as Integer) + score 
+		int countScore = (recipe.totalCalificaciones as Integer) + 1
+		int newScore= (recipesumaCalificaciones as Integer) / countScore
+		
+		log.debug "nueva calificacion: ${newScore}"
+		
+		
+		//qualifyService.saveScore(params.id, newScore, acumScore,countScore)
+		
+		return [id: params.id, score: newScore]
 	}
 	
 }

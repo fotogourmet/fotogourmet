@@ -17,7 +17,7 @@
 		"/validate/$ingrediente?"(controller: "rest", parseRequest: true){
 			action = [GET: 'validate']
 		}
-		"/recipes/$id/score"(controller: "rest", parseRequest: true){
+		"/recipes/${id}/score"(controller: "rest", parseRequest: true){
 			action = [POST: 'qualifyRecipe']
 		}
 		

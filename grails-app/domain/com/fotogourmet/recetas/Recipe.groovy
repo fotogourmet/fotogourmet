@@ -12,6 +12,8 @@ class Recipe {
 	String procedimiento
 	String categoria
 	String calificacion
+	String sumaCalificaciones
+	String totalCalificaciones
 	String video
 
 	static mapping = {
