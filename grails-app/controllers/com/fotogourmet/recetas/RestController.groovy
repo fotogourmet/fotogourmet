@@ -18,7 +18,7 @@ class RestController {
 		getRecipe: [condition: 'all', fields: ['id']],
 		searchRecipes: [condition: 'at_least_one', fields: ['ingredientesB','categoria','sort'],
 		getCode: [condition: 'all', fields:['ean']]],
-		qualifyRecipe: [condition: 'all',fields:['value','id']]
+		qualifyRecipe: [condition: 'all',fields:['id']]
 	]
 	
 	def beforeInterceptor = {

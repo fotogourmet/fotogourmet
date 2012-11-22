@@ -15,7 +15,6 @@ class RecipeService {
 	def authService
 	def queryHelperService
 	def queryUtilsService
-	def qualifyService
 
 	final def outputParameters = [
 		'_id',
@@ -75,33 +74,22 @@ class RecipeService {
 		if (!params.id)
 		throw new BadRequestException("Invalid id")
 		
-		log.debug "ID DEL ORTO1: ${params.id}"
-		
-		log.debug "BODY DE MIERDA: ${body}"
-					
 		def score = body.score
 		
-		log.debug "SCORE: ${score}"
-
-				if (!(score<=5 && score>=1)) 
+		if (!(score<=5 && score>=1)) 
 		throw new BadRequestException("Wrong Score")
-		
-		
-		log.debug "ID DEL ORTO2: ${params.id}"
-		
+				
 		def recipe
 		recipe = get(params.id)
+
+		def acumScore = recipe.sumaCalificaciones + score
+		def countScore = recipe.totalCalificaciones + 1
+		def newScore= acumScore / countScore
 		
-		log.debug "recipe: ${recipe}"
-		
-		int acumScore = (recipe.calificacion as Integer) + score 
-		int countScore = (recipe.totalCalificaciones as Integer) + 1
-		int newScore= (recipesumaCalificaciones as Integer) / countScore
-		
-		log.debug "nueva calificacion: ${newScore}"
-		
-		
-		//qualifyService.saveScore(params.id, newScore, acumScore,countScore)
+		acumScore = acumScore.round(2)
+		newScore = newScore.round(2)
+		 
+		queryHelperService.saveScore(params.id, newScore, acumScore,countScore)
 		
 		return [id: params.id, score: newScore]
 	}
