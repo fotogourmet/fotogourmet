@@ -76,7 +76,7 @@ class RecipeService {
 		
 		def score = body.score
 		
-		if (!(score<=5 && score>=1)) 
+		if (!(score<=5 && score>=0)) 
 		throw new BadRequestException("Wrong Score")
 				
 		def recipe
